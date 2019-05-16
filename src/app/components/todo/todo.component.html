@@ -1,14 +1,11 @@
-<mat-card *ngIf="user" class="card">
+<mat-card class="card">
   <mat-card-header>
-    <mat-card-title>Completed</mat-card-title>
+    <mat-card-title>To Do</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
     <div *ngIf="projectsData | async as query">
-      <mat-card
-        class="card"
-        *ngFor="let project of query.data?.completedProjects"
-      >
+      <mat-card class="card" *ngFor="let project of query.data?.todoProjects">
         <mat-card-header>
           <mat-card-title>{{ project.name }}</mat-card-title>
         </mat-card-header>

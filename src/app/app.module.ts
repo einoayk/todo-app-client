@@ -6,17 +6,23 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { AddProjectButtonComponent } from './add-project-button/add-project-button.component';
-import { AddProjectDialogComponent } from './add-project-button/add-project-dialog/add-project-dialog.component';
-import { AppRoutingModule } from './app-routing.module';
+import { rootRouterConfig } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { CompletedComponent } from './completed/completed.component';
+import { AddProjectButtonComponent } from './components/add-project-button/add-project-button.component';
+import { AddProjectDialogComponent } from './components/add-project-button/add-project-dialog/add-project-dialog.component';
+import { CompletedComponent } from './components/completed/completed.component';
+import { LoginComponent } from './components/login/login.component';
+import { TodoComponent } from './components/todo/todo.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { UserComponent } from './components/user/user.component';
 import { GraphQLModule } from './graphql.module';
-import { MaterialModule } from './material-module';
-import { TodoComponent } from './todo/todo.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
+import { MaterialModule } from './material.module';
+import { AuthService } from './services/auth.service';
+import { TokenInterceptor } from './services/token-intercept.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     TodoComponent,
     CompletedComponent,
     AddProjectButtonComponent,
-    AddProjectDialogComponent
+    AddProjectDialogComponent,
+    UserComponent
   ],
   entryComponents: [AddProjectDialogComponent],
   imports: [
@@ -37,12 +44,12 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     MaterialModule,
-    AppRoutingModule,
+    RouterModule.forRoot(rootRouterConfig, { useHash: false }),
     NoopAnimationsModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService, TokenInterceptor, AuthGuard, LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,0 +1,27 @@
+<div *ngIf="user | async as user">
+  <mat-toolbar id="mainToolbar" color="primary">
+    To Do List of {{ user?.displayName }}
+    <span class="toolbar-spacer"></span>
+
+    <button
+      mat-mini-fab
+      [matMenuTriggerFor]="avatarDropDown"
+      class="toolbar-avatar"
+      color="primary"
+      [ngStyle]="{ 'background-image': 'url(' + user?.photoURL + ')' }"
+    ></button>
+  </mat-toolbar>
+
+  <mat-menu #avatarDropDown="matMenu">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ user?.displayName }}</mat-card-title>
+        <mat-card-subtitle>{{ user?.email }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <button mat-menu-item (click)="logout()">
+      <span>Sign out</span>
+    </button>
+  </mat-menu>
+</div>

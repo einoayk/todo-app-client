@@ -19,7 +19,7 @@ export class AddProjectDialogComponent implements OnInit {
     private fb: FormBuilder,
     private apollo: Apollo,
     private dialogRef: MatDialogRef<AddProjectDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { userId: string }
+    @Inject(MAT_DIALOG_DATA) public data: {}
   ) {}
 
   ngOnInit() {
@@ -33,21 +33,15 @@ export class AddProjectDialogComponent implements OnInit {
       const result = await this.apollo
         .mutate<Project>({
           mutation: gql`
-            mutation ProjectDialogMutation(
-              $userId: String!
-              $name: String!
-              $text: String!
-            ) {
-              createPoject(userId: $userId, name: $name, text: $text) {
-                id
+            mutation ProjectDialogMutation($name: String!, $text: String!) {
+              project: addProject(name: $name, text: $text) {
+                name
+                isReady
+                text
               }
             }
           `,
-          variables: {
-            userId: this.data.userId,
-            name: this.form.value.name,
-            text: this.form.value.text
-          }
+          variables: { name: this.form.value.name, text: this.form.value.text }
         })
         .pipe(first())
         .toPromise();

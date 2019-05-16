@@ -3,6 +3,7 @@ export type Project = {
   name?: string;
   isReady?: boolean;
   text?: string;
+  userId?: string;
 };
 
 export type User = {

@@ -3,8 +3,8 @@ import { Apollo, QueryRef } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
 import { Observable } from 'rxjs';
-import { LoginService } from '../auth/login.service';
-import { Project } from '../types';
+import { AuthService } from '../../services/auth.service';
+import { Project } from '../../types';
 
 @Component({
   selector: 'app-completed',
@@ -16,21 +16,10 @@ export class CompletedComponent implements OnInit {
   projectsData: Observable<ApolloQueryResult<Project[]>>;
   projectsQuery: QueryRef<Project[]>;
 
-  constructor(private apollo: Apollo, private loginService: LoginService) {}
+  constructor(private apollo: Apollo, private authService: AuthService) {}
 
   ngOnInit() {
-    this.getUserAndInitData();
-  }
-
-  getUserAndInitData() {
-    this.loginService.getLoggedInUser().subscribe(user => {
-      this.user = user;
-      console.log(user);
-      if (user) {
-        console.log('kakka');
-        this.initData();
-      }
-    });
+    this.initData();
   }
 
   initData() {

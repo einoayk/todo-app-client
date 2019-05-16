@@ -1,0 +1,25 @@
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Project Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Project Info</mat-label>
+      <input matInput formControlName="text" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    [disabled]="!form.valid || submitting"
+    mat-raised-button
+    type="button"
+    (click)="handleSubmit()"
+  >
+    Submit
+  </button>
+  <button mat-raised-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

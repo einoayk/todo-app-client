@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { first, tap } from 'rxjs/operators';
-import { LoginService } from '../auth/login.service';
-import { Project } from '../types';
+import { AuthService } from '../../services/auth.service';
+import { Project } from '../../types';
 import { AddProjectDialogComponent } from './add-project-dialog/add-project-dialog.component';
 
 @Component({
@@ -12,19 +12,14 @@ import { AddProjectDialogComponent } from './add-project-dialog/add-project-dial
 })
 export class AddProjectButtonComponent implements OnInit {
   @Output() projectCreated = new EventEmitter<Project>();
-  user: firebase.User;
 
-  constructor(private dialog: MatDialog, private loginService: LoginService) {}
+  constructor(private dialog: MatDialog, private auth: AuthService) {}
 
-  ngOnInit() {
-    this.loginService.getLoggedInUser().subscribe(user => {
-      this.user = user;
-    });
-  }
+  ngOnInit() {}
 
   openDialog() {
     this.dialog
-      .open(AddProjectDialogComponent, { data: { userId: this.user.uid } })
+      .open(AddProjectDialogComponent)
       .afterClosed()
       .pipe(
         first(),
