@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import gql from 'graphql-tag';
@@ -12,6 +12,7 @@ import { Project } from '../../types';
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
+  @Output() marked: EventEmitter<any> = new EventEmitter();
   user: firebase.User;
   projectsData: Observable<ApolloQueryResult<Project[]>>;
   projectsQuery: QueryRef<Project[]>;
@@ -31,11 +32,17 @@ export class TodoComponent implements OnInit {
     this.projectsQuery.refetch();
   }
 
+  markedAsCompleted() {
+    this.refetch();
+    this.marked.emit(true);
+  }
+
   private getTodoPorjectsQuery() {
     return this.apollo.watchQuery<Project[]>({
       query: gql`
         query TodoProjectsQuery {
           todoProjects {
+            id
             name
             isReady
             text

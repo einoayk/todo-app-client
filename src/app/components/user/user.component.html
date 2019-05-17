@@ -2,6 +2,6 @@
 <app-add-project-button
   (projectCreated)="todoList.refetch()"
 ></app-add-project-button>
-<app-todo #todoList></app-todo>
+<app-todo #todoList (marked)="completedList.refetch()"></app-todo>
 <app-completed #completedList></app-completed>
 <router-outlet></router-outlet>

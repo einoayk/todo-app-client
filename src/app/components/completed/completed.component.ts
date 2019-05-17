@@ -36,6 +36,7 @@ export class CompletedComponent implements OnInit {
       query: gql`
         query completedProjectsQuery {
           completedProjects {
+            id
             name
             isReady
             text

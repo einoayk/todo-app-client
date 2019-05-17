@@ -13,7 +13,14 @@
           {{ project.text }}
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Edit</button>
+          <app-mark-as-completed-button
+            [projectId]="project.id"
+            (markedAsCompleted)="markedAsCompleted()"
+          ></app-mark-as-completed-button>
+          <app-delete-button
+            [projectId]="project.id"
+            (projectDeleted)="this.refetch()"
+          ></app-delete-button>
         </mat-card-actions>
       </mat-card>
     </div>

@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <p>Would you like to move this project to the completed list?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    [disabled]="submitting"
+    mat-raised-button
+    type="button"
+    (click)="handleSubmit()"
+  >
+    Yes
+  </button>
+  <button mat-raised-button mat-dialog-close>No</button>
+</mat-dialog-actions>

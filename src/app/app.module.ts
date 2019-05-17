@@ -13,7 +13,11 @@ import { AppComponent } from './app.component';
 import { AddProjectButtonComponent } from './components/add-project-button/add-project-button.component';
 import { AddProjectDialogComponent } from './components/add-project-button/add-project-dialog/add-project-dialog.component';
 import { CompletedComponent } from './components/completed/completed.component';
+import { DeleteButtonComponent } from './components/delete-button/delete-button.component';
+import { DeleteDialogComponent } from './components/delete-button/delete-dialog/delete-dialog.component';
 import { LoginComponent } from './components/login/login.component';
+import { MarkAsCompletedButtonComponent } from './components/mark-as-completed-button/mark-as-completed-button.component';
+import { MarkAsCompletedDialogComponent } from './components/mark-as-completed-button/mark-as-completed-dialog/mark-as-completed-dialog.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { UserComponent } from './components/user/user.component';
@@ -33,9 +37,17 @@ import { TokenInterceptor } from './services/token-intercept.service';
     CompletedComponent,
     AddProjectButtonComponent,
     AddProjectDialogComponent,
-    UserComponent
+    UserComponent,
+    MarkAsCompletedButtonComponent,
+    MarkAsCompletedDialogComponent,
+    DeleteButtonComponent,
+    DeleteDialogComponent
   ],
-  entryComponents: [AddProjectDialogComponent],
+  entryComponents: [
+    AddProjectDialogComponent,
+    MarkAsCompletedDialogComponent,
+    DeleteDialogComponent
+  ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,

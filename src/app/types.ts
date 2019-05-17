@@ -1,13 +1,14 @@
-export type Project = {
+export interface Project {
   id?: string;
   name?: string;
   isReady?: boolean;
   text?: string;
   userId?: string;
-};
+}
 
-export type User = {
+export interface User {
   id?: string;
   image?: string;
   displayName?: string;
-};
+  email?: string;
+}
